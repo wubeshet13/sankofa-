@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal — Sankofa International</title>
+  <!-- Google Fonts: Cormorant Garamond (Serif) & Inter (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #927042;      /* Satin Bronze Gold */
+      --primary-hover: #7c5e37;
+      --accent: #11151a;       /* Ink Black */
+      --bg: #fdfcfb;           /* Warm Alabaster */
+      --surface: #ffffff;
+      --text: #11151a;
+      --muted: #5c646c;
+      --border: #e6e3dd;
+      
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+      width: 100%;
+    }
+    
+    /* Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      position: relative;
+    }
+    .brand {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand span {
+      color: var(--primary);
+      font-style: italic;
+      font-weight: 400;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 600;
+    }
+    .btn.active {
+      background-color: transparent !important;
+      color: var(--primary) !important;
+      border-color: var(--primary) !important;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border: 1px solid var(--primary);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: transparent;
+      color: var(--primary);
+    }
+    .btn-accent {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-accent:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* Portal Layout */
+    .portal-section {
+      padding: 64px 0 96px;
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Sidebar tabs */
+    .portal-sidebar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px 16px;
+      border-radius: 0px;
+    }
+    .portal-sidebar h2 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-left: 8px;
+      color: var(--text);
+    }
+    .tab-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 8px;
+      border-radius: 0px;
+      transition: all 0.15s;
+    }
+    .tab-btn:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
+    .tab-btn.active {
+      background: color-mix(in srgb, var(--primary) 8%, var(--bg));
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Content Area */
+    .portal-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 48px;
+      border-radius: 0px;
+      min-height: 480px;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    .panel-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.15s;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    /* Assignment table */
+    .assignment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+    .assignment-table th {
+      text-align: left;
+      padding: 14px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--muted);
+      border-bottom: 2px solid var(--border);
+      background: var(--bg);
+    }
+    .assignment-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .assignment-table tr:hover {
+      background: rgba(0,0,0,0.01);
+    }
+
+    /* Calendar outline */
+    .calendar-list {
+      display: grid;
+      gap: 16px;
+    }
+    .calendar-item {
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+    .calendar-date {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 10px;
+      width: 60px;
+      text-align: center;
+      font-weight: 600;
+      border-radius: 0px;
+      line-height: 1.2;
+    }
+    .calendar-date span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #cbd5e1;
+    }
+    .calendar-details h4 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .calendar-details p {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      color: var(--muted);
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .footer-brand span {
+      color: var(--primary);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .footer-copy {
+      font-size: 12px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: -32px;
+        right: -32px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        align-items: flex-start;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        z-index: 99;
+      }
+      nav.open {
+        display: flex;
+      }
+      nav a {
+        width: 100%;
+        padding: 4px 0;
+      }
+      .portal-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .portal-content {
+        padding: 24px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand">Sankofa <span>International</span></a>
+        <button class="menu-toggle" aria-label="Toggle Menu" onclick="this.nextElementSibling.classList.toggle('open');">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="academics.html">Academics</a>
+          <a href="portal.html" class="btn btn-accent active" style="color:#ffffff;">Portal Login</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Portal Section -->
+  <section class="portal-section">
+    <div class="container">
+      <div class="portal-grid">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="portal-sidebar">
+          <h2>Digital Portal</h2>
+          <button class="tab-btn active" onclick="switchTab(event, 'homework')">Homework Hub</button>
+          <button class="tab-btn" onclick="switchTab(event, 'admissions')">Online Admissions</button>
+          <button class="tab-btn" onclick="switchTab(event, 'calendar')">School Calendar</button>
+        </aside>
+
+        <!-- Main Content Portal Box -->
+        <main class="portal-content">
+          
+          <!-- Homework Hub Panel -->
+          <div id="homework" class="tab-panel active">
+            <h2 class="panel-title">Digital Homework Hub</h2>
+            <p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">
+              Select a class section below to filter assignments and syllabus outlines uploaded by course instructors.
+            </p>
+            
+            <div class="form-group" style="max-width: 320px;">
+              <label>Select Grade / Class</label>
+              <select class="form-control" style="border-radius: 0px;" onchange="loadAssignments(this.value)">
+                <option value="g10-it">Grade 10 — IT & Coding Lab</option>
+                <option value="g11-chem">Grade 11 — Chemistry Section A</option>
+                <option value="g12-phys">Grade 12 — Physics Prep</option>
+              </select>
+            </div>
+
+            <table class="assignment-table">
+              <thead>
+                <tr>
+                  <th>Topic / Document</th>
+                  <th>Instructor</th>
+                  <th>Due Date</th>
+                  <th>Resource</th>
+                </tr>
+              </thead>
+              <tbody id="assignment-body">
+                <!-- Javascript will load content here -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Admissions Panel -->
+          <div id="admissions" class="tab-panel">
+            <h2 class="panel-title">Online Enrollment Admission</h2>
+            <form onsubmit="submitAdmission(event)">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                <div class="form-group">
+                  <label>Student Full Name</label>
+                  <input type="text" class="form-control" required style="border-radius: 0px;" />
+                </div>
+                <div class="form-group">
+                  <label>Target Grade of Entry</label>
+                  <select class="form-control" required style="border-radius: 0px;">
+                    <option value="">Select entry level...</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Parent / Guardian Email</label>
+                <input type="email" class="form-control" required style="border-radius: 0px;" />
+              </div>
+              <div class="form-group">
+                <label>Upload Birth Certificate or Previous Report Card (PDF)</label>
+                <input type="file" class="form-control" style="padding: 8px 12px; border-radius: 0px;" required />
+              </div>
+              <button type="submit" class="btn btn-accent" style="margin-top: 10px;">Submit Online Application</button>
+            </form>
+          </div>
+
+          <!-- Calendar Panel -->
+          <div id="calendar" class="tab-panel">
+            <h2 class="panel-title">Sankofa Events Calendar</h2>
+            <div class="calendar-list">
+              <div class="calendar-item">
+                <div class="calendar-date">14<span>Sep</span></div>
+                <div class="calendar-details">
+                  <h4>First Term Registration & Syllabus Distribution</h4>
+                  <p>Faculty office open for standard material picks, uniform configurations, and course guidelines registration.</p>
+                </div>
+              </div>
+              <div class="calendar-item">
+                <div class="calendar-date">28<span>Sep</span></div>
+                <div class="calendar-details">
+                  <h4>Parent-Teacher Association (PTA) General Meet</h4>
+                  <p>General strategy presentation, digital portal alignment tutorials, and curriculum progress evaluations.</p>
+                </div>
+              </div>
+              <div class="calendar-item">
+                <div class="calendar-date">15<span>Oct</span></div>
+                <div class="calendar-details">
+                  <h4>Mid-Term Physics & Coding Assessments</h4>
+                  <p>Grade-level testing schedules for science departments and practical IT coding projects submissions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">Sankofa <span>International</span></span>
+        <span class="footer-copy">&copy; 2026 Prepared by Wubshet Zerfu for IT Faculty Evaluation</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching logic
+    function switchTab(e, tabId) {
+      const panels = document.querySelectorAll('.tab-panel');
+      const buttons = document.querySelectorAll('.tab-btn');
+      
+      panels.forEach(p => p.classList.remove('active'));
+      buttons.forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      e.target.classList.add('active');
+    }
+
+    // Dynamic homework generator
+    const data = {
+      'g10-it': [
+        { title: 'Project 1: Personal Profile Styling in HTML/CSS', teacher: 'Wubshet Zerfu', due: 'August 18, 2026' },
+        { title: 'Workbook: Computational Thinking Exercises', teacher: 'Wubshet Zerfu', due: 'August 24, 2026' }
+      ],
+      'g11-chem': [
+        { title: 'Lab: Chemical Reactions & Gas Pressure Outlines', teacher: 'Blen Shimelis', due: 'August 16, 2026' },
+        { title: 'Problem Sheet: Stoichiometry Balance Formulations', teacher: 'Blen Shimelis', due: 'August 22, 2026' }
+      ],
+      'g12-phys': [
+        { title: 'Review Outline: Electromagnetism & Core Integrals', teacher: 'Mulugeta Tadesse', due: 'August 20, 2026' },
+        { title: 'Self-Test: Kinetic Energy Theories & Calculations', teacher: 'Mulugeta Tadesse', due: 'August 27, 2026' }
+      ]
+    };
+
+    function loadAssignments(classId) {
+      const list = data[classId] || [];
+      const tbody = document.getElementById('assignment-body');
+      tbody.innerHTML = '';
+      
+      if(list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--muted);">No assignments loaded.</td></tr>';
+        return;
+      }
+      
+      list.forEach(a => {
+        tbody.innerHTML += `
+          <tr>
+            <td style="font-weight:600;">${a.title}</td>
+            <td>${a.teacher}</td>
+            <td style="color:var(--primary); font-weight:500;">${a.due}</td>
+            <td>
+              <button class="btn" style="padding:6px 12px; font-size:11px;" onclick="simulateDownload(this)">
+                Download File
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function simulateDownload(button) {
+      button.innerText = 'Downloading...';
+      button.style.opacity = '0.5';
+      setTimeout(() => {
+        button.innerText = 'Downloaded ✓';
+        button.style.background = '#059669';
+        button.style.borderColor = '#059669';
+        button.style.color = '#ffffff';
+        button.style.opacity = '1';
+        alert('File download successfully simulated. In a live system, this sends the class handout PDF directly to the student\'s device.');
+      }, 1000);
+    }
+
+    function submitAdmission(e) {
+      e.preventDefault();
+      alert('Admission application successfully dispatched! The documents have been stored in the registrar database queue. In a live system, the administrative team will immediately review the files.');
+      e.target.reset();
+    }
+
+    // Initial load
+    loadAssignments('g10-it');
+  </script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academics — Sankofa International</title>
+  <!-- Google Fonts: Cormorant Garamond (Serif) & Inter (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #927042;      /* Satin Bronze Gold */
+      --primary-hover: #7c5e37;
+      --accent: #11151a;       /* Ink Black */
+      --bg: #fdfcfb;           /* Warm Alabaster */
+      --surface: #ffffff;
+      --text: #11151a;
+      --muted: #5c646c;
+      --border: #e6e3dd;
+      
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+      width: 100%;
+    }
+    
+    /* Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      position: relative;
+    }
+    .brand {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand span {
+      color: var(--primary);
+      font-style: italic;
+      font-weight: 400;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 600;
+    }
+    .btn.active {
+      background-color: transparent !important;
+      color: var(--primary) !important;
+      border-color: var(--primary) !important;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border: 1px solid var(--primary);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: transparent;
+      color: var(--primary);
+    }
+    .btn-accent {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-accent:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* Page Intro */
+    .intro-section {
+      padding: 72px 0 60px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 3%, var(--bg)), var(--bg));
+      border-bottom: 1px solid var(--border);
+    }
+    .intro-title {
+      font-family: var(--font-heading);
+      font-size: 46px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .intro-lead {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* Main Academics Content */
+    .section {
+      padding: 96px 0;
+      background: var(--surface);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .dept-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 48px 40px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .dept-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px color-mix(in srgb, var(--primary) 12%, transparent);
+      border-color: color-mix(in srgb, var(--primary) 30%, var(--border));
+    }
+    .dept-icon {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+    .dept-card h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .dept-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* Syllabus List */
+    .syllabus-section {
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .curriculum-list {
+      max-width: 800px;
+      margin-top: 36px;
+    }
+    .curriculum-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-radius: 0px;
+    }
+    .curr-info h4 {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    .curr-info p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      color: var(--muted);
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .footer-brand span {
+      color: var(--primary);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .footer-copy {
+      font-size: 12px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: -32px;
+        right: -32px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        align-items: flex-start;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        z-index: 99;
+      }
+      nav.open {
+        display: flex;
+      }
+      nav a {
+        width: 100%;
+        padding: 4px 0;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .curriculum-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand">Sankofa <span>International</span></a>
+        <button class="menu-toggle" aria-label="Toggle Menu" onclick="this.nextElementSibling.classList.toggle('open');">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="academics.html" class="active">Academics</a>
+          <a href="portal.html" class="btn btn-accent" style="color:#ffffff;">Portal Login</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Intro -->
+  <section class="intro-section">
+    <div class="container">
+      <h1 class="intro-title">Academic Departments</h1>
+      <p class="intro-lead">Discover our rigorous, balanced curriculum designed to foster academic growth and prepare students for university placement.</p>
+    </div>
+  </section>
+
+  <!-- Departments Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        <div class="dept-card">
+          <div class="dept-icon">🔬</div>
+          <h3>Natural Sciences</h3>
+          <p>Equipping students with analytical thinking skills through biology, chemistry, and physics laboratories and practical experiments.</p>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon">💻</div>
+          <h3>IT & Programming Lab</h3>
+          <p>Teaching the fundamentals of digital literacy, web development (HTML/CSS), and computational logic to foster technical creators.</p>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon">🌍</div>
+          <h3>Humanities & Languages</h3>
+          <p>Building strong global perspectives and literature appreciation in English, local languages, history, and geography studies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum List -->
+  <section class="syllabus-section">
+    <div class="container">
+      <span class="section-label">Academic Outlines</span>
+      <h2 style="font-family: var(--font-heading); font-size: 28px; font-weight: 500; letter-spacing: -0.5px;">Curriculum Outline Downloads</h2>
+      <div class="curriculum-list">
+        <div class="curriculum-item">
+          <div class="curr-info">
+            <h4>Grade 9–10 Syllabus Guideline</h4>
+            <p>PDF Document • 2.4 MB • Updated August 2026</p>
+          </div>
+          <a href="#" class="btn btn-accent" onclick="event.preventDefault(); alert('Syllabus outline PDF download initiated.');">Download syllabus</a>
+        </div>
+        <div class="curriculum-item">
+          <div class="curr-info">
+            <h4>Grade 11–12 College Prep Syllabus</h4>
+            <p>PDF Document • 3.1 MB • Updated August 2026</p>
+          </div>
+          <a href="#" class="btn btn-accent" onclick="event.preventDefault(); alert('Syllabus outline PDF download initiated.');">Download syllabus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">Sankofa <span>International</span></span>
+        <span class="footer-copy">&copy; 2026 Prepared by Wubshet Zerfu for IT Faculty Evaluation</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zemen Technologies — Custom Software Engineering & Digital Architectures</title>
+  <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg: #faf8f5;        /* Warm off-white / cream */
+      --surface: #ffffff;   /* Pure white */
+      --text: #1c1917;      /* Deep stone charcoal */
+      --muted: #78716c;     /* Stone gray */
+      --border: #e7e5e4;    /* Crispy thin border */
+      --primary: #1c3d5a;   /* Single deep brand color (Deep Slate Blue) */
+      --primary-hover: #0e2438;
+      
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Top Navbar */
+    header.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    
+    .logo span {
+      color: var(--primary);
+    }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 0px; /* Sharp corners */
+      transition: all 0.15s ease;
+    }
+    
+    .btn:hover {
+      border-color: var(--text);
+      background: rgba(0, 0, 0, 0.02);
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+      color: #ffffff;
+    }
+    
+    /* Asymmetrical Hero Layout */
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 40px 80px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .hero-left h1 {
+      font-family: var(--font-serif);
+      font-size: 54px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    
+    .hero-left h1 span {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    
+    .hero-right {
+      border-left: 2px solid var(--primary);
+      padding-left: 32px;
+    }
+    
+    .hero-right p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+    
+    /* Services Section with Asymmetry */
+    .section-header {
+      max-width: 1200px;
+      margin: 80px auto 40px;
+      padding: 0 40px;
+    }
+    
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .section-header p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; /* Line grid effect */
+      background: var(--border);
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      border: 1px solid var(--border);
+    }
+    
+    .service-card {
+      background: var(--surface);
+      /* Varying padding to break perfect symmetry */
+      padding: 48px 36px 40px;
+      transition: background-color 0.15s ease;
+    }
+    
+    .service-card:nth-child(2) {
+      padding: 36px 48px 48px; /* Different padding */
+    }
+    
+    .service-card:nth-child(3) {
+      padding: 40px 36px 48px; /* Different padding */
+    }
+    
+    .service-card:hover {
+      background: rgba(28, 61, 90, 0.02);
+    }
+    
+    .service-icon {
+      color: var(--primary);
+      margin-bottom: 24px;
+      display: block;
+    }
+    
+    .service-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    
+    /* Service Packages Section (Symmetrical removal, structured tables) */
+    .packages-container {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 40px;
+      border-top: 1px solid var(--border);
+      padding-top: 80px;
+    }
+    
+    .packages-header {
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    
+    .packages-header h2 {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+    
+    .packages-header p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    
+    .packages-table-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    
+    .package-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 0px; /* Sharp corners */
+    }
+    
+    /* Make the middle package slightly offset in padding but no special glow or color */
+    .package-card.highlighted {
+      padding: 48px 40px;
+      border-color: var(--text);
+    }
+    
+    .package-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .package-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    
+    .package-features {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+    
+    .package-features li {
+      font-size: 13.5px;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .package-features li i {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    /* Clean CTA Banner */
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 80px auto 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+    
+    .cta-left {
+      max-width: 600px;
+    }
+    
+    .cta-left h2 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    
+    .cta-left p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    /* Responsive Styling */
+    @media (max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-top: 60px;
+      }
+      .hero-right {
+        border-left: none;
+        border-top: 2px solid var(--primary);
+        padding-left: 0;
+        padding-top: 24px;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .packages-table-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .cta-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      Zemen<span>Tech.</span>
+    </a>
+    
+    <div class="nav-actions">
+      <a href="https://zemen.com.et/contact" target="_blank" class="btn btn-primary">
+        <i data-lucide="mail" style="width: 16px; height: 16px;"></i> Get In Touch
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Hero -->
+  <section class="hero-container">
+    <div class="hero-left">
+      <h1>Custom Software Engineering & <span>Digital Architectures</span></h1>
+    </div>
+    <div class="hero-right">
+      <p>We partner with high-performance organizations to design, code, and deploy custom software products, scalable cloud setups, and compliant business tools that drive enterprise growth across East Africa.</p>
+      <a href="https://zemen.com.et/contact" target="_blank" class="btn btn-primary" style="padding: 12px 28px;">
+        Start Your Project
+      </a>
+    </div>
+  </section>
+
+  <!-- Core Services -->
+  <section>
+    <div class="section-header">
+      <h2>Capabilities</h2>
+      <p>Purpose-built engineering frameworks for operations that scale.</p>
+    </div>
+    
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="code-2" style="width: 28px; height: 28px;"></i></div>
+        <h3 class="service-title">Enterprise Software</h3>
+        <p class="service-desc">Custom ERP and CRM architectures engineered for local tax compliance, transaction scaling, and complex internal inventory workflows.</p>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="smartphone" style="width: 28px; height: 28px;"></i></div>
+        <h3 class="service-title">Web & Mobile Apps</h3>
+        <p class="service-desc">High-speed web platforms and responsive native apps integrated with Telebirr, CBE Birr, and international banking gateways.</p>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="database" style="width: 28px; height: 28px;"></i></div>
+        <h3 class="service-title">Cloud Infrastructure</h3>
+        <p class="service-desc">Multi-region cloud database deployment, containerization engineering, and secure continuous delivery (CI/CD) pipelines.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section class="packages-container">
+    <div class="packages-header">
+      <h2>Service Packages</h2>
+      <p>Select a baseline package structure, or request a custom consult.</p>
+    </div>
+    
+    <div class="packages-table-grid">
+      <!-- Starter -->
+      <div class="package-card">
+        <div class="package-header">
+          <span class="package-name">Starter Package</span>
+          <h3 class="package-title">Brand Essentials</h3>
+          <ul class="package-features">
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Multilingual Company Website</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Domain & Hosting setup</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Business Email registration</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Basic Search SEO Indexing</li>
+          </ul>
+        </div>
+        <a href="https://zemen.com.et/contact" target="_blank" class="btn" style="width: 100%; justify-content: center;">Inquire Starter</a>
+      </div>
+      
+      <!-- Growth (Asymmetrical middle layout offset padding) -->
+      <div class="package-card highlighted">
+        <div class="package-header">
+          <span class="package-name">Growth Package</span>
+          <h3 class="package-title">E-Commerce & Scale</h3>
+          <ul class="package-features">
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Custom E-Commerce Store</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Telebirr & CBE Payouts API</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Simple POS & Inventory systems</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Custom SEO & Analytics dashboards</li>
+          </ul>
+        </div>
+        <a href="https://zemen.com.et/contact" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Inquire Growth</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="package-card">
+        <div class="package-header">
+          <span class="package-name">Enterprise Package</span>
+          <h3 class="package-title">Custom Systems</h3>
+          <ul class="package-features">
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Custom ERP & Financial workflows</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Native iOS & Android apps</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> Third-party API Connectors</li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px;"></i> 24/7 SLA Priority Support</li>
+          </ul>
+        </div>
+        <a href="https://zemen.com.et/contact" target="_blank" class="btn" style="width: 100%; justify-content: center;">Inquire Enterprise</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="cta-left">
+      <h2>Let's build together.</h2>
+      <p>Contact our engineering desk to discuss your software project, operational metrics, and target milestones.</p>
+    </div>
+    <a href="https://zemen.com.et/contact" target="_blank" class="btn btn-primary" style="padding: 14px 32px;">
+      Schedule Consultation
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Zemen Technologies. All rights reserved.</p>
+  </footer>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
